@@ -33,8 +33,8 @@ export default function Hero() {
         {SITE_DESCRIPTION}
       </h2>
       <h1 className={cn(styleUtils.appear, styleUtils['appear-third'], styles.hero)}>
-        Welcome to the
-        <br className={styleUtils['show-on-desktop']} /> {BRAND_NAME} conference
+        Issue a Verifiable Credential
+        <br className={styleUtils['show-on-desktop']} /> with {BRAND_NAME} Bank
       </h1>
       <h2
         className={cn(
@@ -50,7 +50,7 @@ export default function Hero() {
         <p>{DATE}</p>
         <div className={styles['description-separator']} />
         <p>
-          <strong>Online</strong>
+          <strong>TBD</strong>
         </p>
       </div>
     </div>
