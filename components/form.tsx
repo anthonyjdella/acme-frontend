@@ -39,7 +39,7 @@ export default function Form({ sharePage }: Props) {
   const [errorTryAgain, setErrorTryAgain] = useState(false);
   const [focused, setFocused] = useState(false);
   const [formState, setFormState] = useState<FormState>('default');
-  const { setPageState, setUserData, setJsonData} = useConfData();
+  const { setPageState, setUserData} = useConfData();
   const router = useRouter();
   const {
     ref: captchaRef,
