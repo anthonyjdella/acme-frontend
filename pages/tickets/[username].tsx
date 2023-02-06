@@ -28,7 +28,7 @@ type Props = {
   username: string | null;
   usernameFromParams: string | null;
   name: string | null;
-  ticketNumber: number | null;
+  ticketNumber: string | null;
 };
 
 export default function TicketShare({ username, ticketNumber, name, usernameFromParams }: Props) {
@@ -71,7 +71,7 @@ export default function TicketShare({ username, ticketNumber, name, usernameFrom
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const username = params?.username?.toString() || null;
   let name: string | null | undefined;
-  let ticketNumber: number | null | undefined;
+  let ticketNumber: string | null | undefined;
 
   if (username) {
     const user = await getUserByUsername(username);

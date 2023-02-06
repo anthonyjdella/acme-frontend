@@ -89,7 +89,7 @@ export type Job = {
 export type ConfUser = {
   id?: string;
   email?: string;
-  ticketNumber?: number | null;
+  ticketNumber?: string | null;
   name?: string | null;
   username?: string | null;
   createdAt?: number | null;
