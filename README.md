@@ -1,6 +1,8 @@
 # Issue a Verifiable Credential with ACME Bank
 
-This virtual event starter kit was used to run [Next.js Conf 2020](https://nextjs.org/2020/conf), which had almost 40,000 live attendees.
+Visit [acme-frontend.vercel.app/](https://acme-frontend.vercel.app/).
+
+This was built on top of the [Virtual Event Starter Kit](https://github.com/vercel/virtual-event-starter-kit) by Vercel.
 
 ---
 
