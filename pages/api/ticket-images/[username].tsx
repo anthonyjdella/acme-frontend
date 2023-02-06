@@ -22,7 +22,7 @@ import { getUserByUsername } from '@lib/db-api';
 export default async function ticketImages(req: NextApiRequest, res: NextApiResponse) {
   let url: string;
   let name: string | null | undefined;
-  let ticketNumber: number | null | undefined = SAMPLE_TICKET_NUMBER;
+  let ticketNumber: string | null | undefined = SAMPLE_TICKET_NUMBER;
   const { username } = req.query || {};
   if (username) {
     const usernameString = username.toString();
