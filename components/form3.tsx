@@ -23,7 +23,7 @@ import LoadingDots from './loading-dots';
 import styleUtils from './utils.module.css';
 import styles from './form.module.css';
 import useEmailQueryParam from '@lib/hooks/use-email-query-param';
-import { register, validateCredential } from '@lib/user-api';
+import { createDid } from '@lib/user-api';
 import Captcha, { useCaptcha } from './captcha';
 
 type FormState = 'default' | 'loading' | 'error';
@@ -34,12 +34,13 @@ type Props = {
 
 export default function Form({ sharePage }: Props) {
   const [email, setEmail] = useState('');
-  const [issuerDid, setIssuerDid] = useState('');
+  const [keyType, setKeyType] = useState('');
+  const [didType, setDidType] = useState('subject');
   const [errorMsg, setErrorMsg] = useState('');
   const [errorTryAgain, setErrorTryAgain] = useState(false);
   const [focused, setFocused] = useState(false);
   const [formState, setFormState] = useState<FormState>('default');
-  const { setPageState, setUserData, setJsonData} = useConfData();
+  const { setPageState, setUserData } = useConfData();
   const router = useRouter();
   const {
     ref: captchaRef,
@@ -48,61 +49,58 @@ export default function Form({ sharePage }: Props) {
     isEnabled: isCaptchaEnabled
   } = useCaptcha();
 
-  const handleRegister = useCallback(
-    () => {
-      console.log(issuerDid);
-      validateCredential(issuerDid)
-        .then(async res => {
-          if (!res.ok) {
-            throw new FormError(res);
+  const handleRegister = useCallback(() => {
+    console.log(keyType);
+    console.log(didType);
+    createDid(keyType, didType)
+      .then(async res => {
+        if (!res.ok) {
+          throw new FormError(res);
+        }
+        const data = await res.json();
+        console.log(data);
+        const params = {
+          id: data.id,
+          ticketNumber: data.did.id,
+          name: 'Decentralized Identifier (DID):',
+          username: 'Alice'
+        };
+
+        console.log(params);
+
+        if (sharePage) {
+          const queryString = Object.keys(params)
+            .map(
+              key =>
+                `${encodeURIComponent(key)}=${encodeURIComponent(
+                  params[key as keyof typeof params] || ''
+                )}`
+            )
+            .join('&');
+          await router.replace(`/?${queryString}`, '/');
+        } else {
+          setUserData(params);
+          setPageState('ticket');
+        }
+      })
+      .catch(async err => {
+        let message = 'Error! Please try again.';
+
+        if (err instanceof FormError) {
+          const { res } = err;
+          const data = res.headers.get('Content-Type')?.includes('application/json')
+            ? await res.json()
+            : null;
+
+          if (data?.error?.code === 'bad_email') {
+            message = 'Please enter a valid email';
           }
-          const data = await res.json();
-          console.log(data);
-          const params = {
-            id: data.id,
-            ticketNumber: JSON.stringify(data),
-            name: 'JSON Response:',
-            username: 'Alice'
-          };
-          
-          console.log(params)
-          console.log(typeof(JSON.stringify(params.ticketNumber)));
+        }
 
-          if (sharePage) {
-            const queryString = Object.keys(params)
-              .map(
-                key =>
-                  `${encodeURIComponent(key)}=${encodeURIComponent(
-                    params[key as keyof typeof params] || ''
-                  )}`
-              )
-              .join('&');
-            await router.replace(`/?${queryString}`, '/');
-          } else {
-            setUserData(params);
-            setPageState('ticket');
-          }
-        })
-        .catch(async err => {
-          let message = 'Error! Please try again.';
-
-          if (err instanceof FormError) {
-            const { res } = err;
-            const data = res.headers.get('Content-Type')?.includes('application/json')
-              ? await res.json()
-              : null;
-
-            if (data?.error?.code === 'bad_email') {
-              message = 'Please enter a valid email';
-            }
-          }
-
-          setErrorMsg(message);
-          setFormState('error');
-        });
-    },
-    [email, router, setPageState, setUserData, sharePage, issuerDid]
-  );
+        setErrorMsg(message);
+        setFormState('error');
+      });
+  }, [email, router, setPageState, setUserData, sharePage, keyType]);
 
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
@@ -143,7 +141,7 @@ export default function Form({ sharePage }: Props) {
     >
       <div className={styles['form-row']}>
         <div className={cn(styles['input-label'], styles.error)}>
-          <div className={cn(styles.input, styles['input-text'])}>Enter the correct Issuer DID</div>
+          <div className={cn(styles.input, styles['input-text'])}>Enter a valid keytype</div>
           <button
             type="button"
             className={cn(styles.submit, styles.register, styles.error)}
@@ -174,15 +172,13 @@ export default function Form({ sharePage }: Props) {
           <input
             className={styles.input}
             autoComplete="off"
-            // type="email"
+            type="text"
             id="email-input-field"
-            // value={email}
-            value={issuerDid}
-            // onChange={e => setEmail(e.target.value)}
-            onChange={e => setIssuerDid(e.target.value)}
+            value={keyType}
+            onChange={e => setKeyType(e.target.value)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            placeholder="Enter Issuer Decentralized Identifier (DID)"
+            placeholder="Enter keytype"
             required
           />
         </label>
@@ -191,7 +187,7 @@ export default function Form({ sharePage }: Props) {
           className={cn(styles.submit, styles.register, styles[formState])}
           disabled={formState === 'loading'}
         >
-          {formState === 'loading' ? <LoadingDots size={4} /> : <>Verify</>}
+          {formState === 'loading' ? <LoadingDots size={4} /> : <>Create Subject DID</>}
         </button>
       </div>
       <Captcha ref={captchaRef} onVerify={handleRegister} />

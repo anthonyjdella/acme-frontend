@@ -54,7 +54,7 @@ export default function TicketProfile({ name, username, size = 1, ticketGenerati
               [styles.show]: ticketGenerationState === 'loading'
             })}
           >
-            {name || username || 'Your Name'}
+            {username || 'Your Name'}
           </span>
         </p>
         <p className={styles.username}>

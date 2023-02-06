@@ -15,7 +15,7 @@
  */
 
 type Props = {
-  number: number;
+  number: string;
 };
 
 export default function TicketNumber({ number }: Props) {
@@ -23,8 +23,8 @@ export default function TicketNumber({ number }: Props) {
   const prefix = `000000`.slice(numDigits);
   return (
     <>
-      № {prefix}
-      {number}
+      🙂 😎 🎉 🥳 💯
+      {/* {number} */}
     </>
   );
 }

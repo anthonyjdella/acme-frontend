@@ -84,10 +84,11 @@
 
 .ticket-number {
   font-weight: bold;
-  font-size: calc(40px * var(--size));
   line-height: 1;
   width: calc(330px * var(--size));
   text-align: center;
+  word-wrap: break-word;
+  font-size: .75vw;
 }
 
 @media (min-width: 768px) {

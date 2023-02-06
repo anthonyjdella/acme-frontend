@@ -78,7 +78,7 @@ export default function Ticket({ username, name, ticketNumber, sharePage }: Prop
               )
             ) : (
               <>
-                You're in. <br /> Make it unique.
+                Success! <br />
               </>
             )}
           </h2>
@@ -88,14 +88,11 @@ export default function Ticket({ username, name, ticketNumber, sharePage }: Prop
                 Join {name ?? 'them'} on {DATE}.
               </>
             ) : (
-              <>
-                Generate a unique ticket image with <br className={styleUtils['hide-on-mobile']} />
-                your GitHub profile.
-              </>
+              <>Generated successully.</>
             )}
           </p>
         </div>
-        <div className={cn(styleUtils.appear, styleUtils['appear-third'])}>
+        {/* <div className={cn(styleUtils.appear, styleUtils['appear-third'])}>
           {!sharePage ? (
             <TicketForm
               defaultUsername={username}
@@ -104,7 +101,7 @@ export default function Ticket({ username, name, ticketNumber, sharePage }: Prop
           ) : (
             <Form sharePage />
           )}
-        </div>
+        </div> */}
       </div>
       <div className={styles['ticket-visual-wrapper']}>
         <div
@@ -116,18 +113,19 @@ export default function Ticket({ username, name, ticketNumber, sharePage }: Prop
             name={name}
             ticketNumber={ticketNumber}
             ticketGenerationState={ticketGenerationState}
+            title={name}
           />
         </div>
         {!sharePage && (
           <>
             {username ? (
               <div>
-                <div className={styles['ticket-actions']}>
+                {/* <div className={styles['ticket-actions']}>
                   <TicketActions username={username} />
                 </div>
                 <div className={styles['ticket-copy']}>
-                  <TicketCopy username={username} />
-                </div>
+                  <TicketCopy username="{username}" />
+                </div> */}
               </div>
             ) : (
               <div className={styles['ticket-actions-placeholder']} />

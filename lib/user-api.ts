@@ -15,6 +15,53 @@
  */
 import crypto from 'crypto';
 
+export async function createDid(keyType: string, didType: string) {
+  console.log(keyType, didType);
+  return await fetch('http://localhost:8080/v1/dids/key', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      keyType: keyType,
+      didType: didType
+    })
+  });
+}
+
+export async function createSchema(issuerDid: string) {
+  console.log(issuerDid);
+  return await fetch('http://localhost:8080/v1/schemas', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      author: issuerDid
+    })
+  });
+}
+
+export async function validateCredential(issuerDid: string, subjectDid?: string, schemaID?: string) {
+  return await fetch('http://localhost:8080/v1/credentials', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      data: {
+        givenName: 'Alice',
+        employedAt: '2022-08-20T13:20:10.000+0000'
+      },
+      issuer: issuerDid,
+      subject: 'did:key:z6MkqcFHFXqzsYyDYrEUA2pVCfQGJz2rYoCZy5WWszzSW3o6',
+      '@context': 'https://www.w3.org/2018/credentials/v1',
+      expiry: '2051-10-05T14:48:00.000Z',
+      schema: 'b28feb61-e0b8-454a-86ed-d487a46e8584'
+    })
+  });
+}
+
 export async function register(email: string, token?: string) {
   return await fetch('/api/register', {
     method: 'POST',

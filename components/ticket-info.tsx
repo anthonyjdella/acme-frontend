@@ -23,26 +23,27 @@ import VercelLogo from '@components/icons/icon-platform';
 const siteUrl = new URL(SITE_URL);
 const siteUrlForTicket = `${siteUrl.host}${siteUrl.pathname}`.replace(/\/$/, '');
 
-export default function TicketInfo({ logoTextSecondaryColor = 'var(--accents-5)' }) {
+type Props = {
+  did?: string;
+  name?: string;
+}
+
+export default function TicketInfo({ did, name }: Props) {
   const createdBy = (
     <div className={styles['created-by']}>
-      <div className={styles['created-by-text']}>Created by </div>
-      <div className={styles['created-by-logo']}>
-        <VercelLogo height="100%" color="var(--accents-4)" />
-      </div>
+      <div className={styles['created-by-text']}>Created by ACME</div>
     </div>
   );
   return (
     <div className={styles.info}>
-      <div className={styles.logo}>
+      {/* <div className={styles.logo}>
         <Logo textSecondaryColor={logoTextSecondaryColor} />
-      </div>
+      </div> */}
+      <div>{name}</div>
       <div className={styles.date}>
-        <div>{DATE}</div>
-        <div>ONLINE</div>
+        <div>{did}</div>
       </div>
       <div className={styleUtils['hide-on-mobile']}>{createdBy}</div>
-      <div className={styles.url}>{siteUrlForTicket}</div>
       <div className={styleUtils['show-on-mobile']}>{createdBy}</div>
     </div>
   );

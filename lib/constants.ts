@@ -16,7 +16,6 @@
 
 export const SITE_URL = 'https://demo.vercel.events';
 export const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN || new URL(SITE_URL).origin;
-export const TWITTER_USER_NAME = 'vercel';
 export const BRAND_NAME = 'ACME';
 export const SITE_NAME_MULTILINE = ['ACME', 'Conf'];
 export const SITE_NAME = 'ACME Bank';
@@ -41,32 +40,8 @@ export const TBD_BLOG =
 export const SAMPLE_TICKET_NUMBER = 1234;
 export const NAVIGATION = [
   {
-    name: 'Live Stage',
-    route: '/stage/a'
-  },
-  {
-    name: 'Vercel Stage',
-    route: '/stage/c'
-  },
-  {
-    name: '100ms Stage',
-    route: '/stage/m'
-  },
-  {
-    name: 'Schedule',
-    route: '/schedule'
-  },
-  {
-    name: 'Speakers',
-    route: '/speakers'
-  },
-  {
-    name: 'Expo',
-    route: '/expo'
-  },
-  {
-    name: 'Jobs',
-    route: '/jobs'
+    name: 'Home',
+    route: '/'
   }
 ];
 

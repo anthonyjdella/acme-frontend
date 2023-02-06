@@ -21,6 +21,10 @@ import Layout from './layout';
 import ConfContainer from './conf-container';
 import Hero from './hero';
 import Form from './form';
+import Form2 from './form2';
+import Form3 from './form3';
+import Form4 from './form4';
+import Select from './select';
 import LearnMore from './learn-more';
 
 type Props = {
@@ -36,6 +40,7 @@ export default function Conf({
 }: Props) {
   const [userData, setUserData] = useState<UserData>(defaultUserData);
   const [pageState, setPageState] = useState<PageState>(defaultPageState);
+  const [did, setDid] = useState('');
 
   return (
     <ConfDataContext.Provider
@@ -50,6 +55,17 @@ export default function Conf({
           {pageState === 'registration' && !sharePage ? (
             <>
               <Hero />
+              {/* <Select
+                aria-label="Select a DID Type"
+                value="test"
+                onChange={e => setDid(e.target.value)}
+              >
+                <option>Issuer</option>
+                <option>Subject</option>
+              </Select> */}
+              <Form2 />
+              <Form3 />
+              <Form4 />
               <Form />
               <LearnMore />
             </>

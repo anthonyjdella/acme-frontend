@@ -27,9 +27,10 @@ import TicketMonoMobile from './ticket-mono-mobile';
 type Props = {
   size?: number;
   name?: string;
-  ticketNumber?: number;
+  ticketNumber?: string;
   username?: string;
   ticketGenerationState?: TicketGenerationState;
+  title?: string
 };
 
 export default function TicketVisual({
@@ -37,7 +38,8 @@ export default function TicketVisual({
   name,
   username,
   ticketNumber,
-  ticketGenerationState = 'default'
+  ticketGenerationState = 'default',
+  title,
 }: Props) {
   return (
     <>
@@ -57,7 +59,7 @@ export default function TicketVisual({
           />
         </div>
         <div className={styles.info}>
-          <TicketInfo logoTextSecondaryColor={ticketNumber ? 'var(--brand)' : undefined} />
+          <TicketInfo did={ticketNumber} name={title}/>
         </div>
         {ticketNumber && (
           <div className={styles['ticket-number-wrapper']}>

@@ -20,7 +20,7 @@ export type PageState = 'registration' | 'ticket';
 
 export type UserData = {
   id?: string;
-  ticketNumber?: number;
+  ticketNumber?: string;
   username?: string;
   name?: string;
 };
