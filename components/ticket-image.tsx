@@ -35,7 +35,7 @@ export default function TicketImage() {
           <TicketVisual
             size={1700 / 650}
             username={query.username ? query.username.toString() : undefined}
-            ticketNumber={parseInt(query.ticketNumber.toString(), 10)}
+            ticketNumber={query.ticketNumber.toString()}
             name={
               query.name
                 ? query.name?.toString()

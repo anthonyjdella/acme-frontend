@@ -1,4 +1,4 @@
-# Virtual Events Starter Kit
+# Issue a Verifiable Credential with ACME Bank
 
 This virtual event starter kit was used to run [Next.js Conf 2020](https://nextjs.org/2020/conf), which had almost 40,000 live attendees.
 
