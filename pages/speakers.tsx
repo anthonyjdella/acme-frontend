@@ -32,12 +32,13 @@ type Props = {
 export default function Speakers({ speakers }: Props) {
   const meta = {
     title: 'Speakers - Virtual Event Starter Kit',
-    description: META_DESCRIPTION
+    description: META_DESCRIPTION,
+    desc: 'Facilitating identity and data interactions'
   };
   return (
     <Page meta={meta}>
       <Layout>
-        <Header hero="Speakers" description={meta.description} />
+        <Header hero="Identity Wallet" description={meta.desc} />
         <SpeakersGrid speakers={speakers} />
       </Layout>
     </Page>

@@ -37,10 +37,9 @@ const DemoModal = () => {
   }, [router]);
   return (
     <div className="font-sans">
-      <p className="text-[32px] font-semibold my-0">Take your Webinar for a test drive</p>
+      <p className="text-[32px] font-semibold my-0">Response</p>
       <p className="text-gray-300 text-[15px] my-0">
-        We have setup a few profiles to make it easy for you or your team to experience each
-        perspective. Join in one click or share access with anyone else.
+        JSON
       </p>
       <div>
         {data.map(m => (
