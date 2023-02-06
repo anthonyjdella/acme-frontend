@@ -37,7 +37,7 @@ export const COPYRIGHT_HOLDER = process.env.NEXT_PUBLIC_COPYRIGHT_HOLDER;
 export const REPO = 'https://github.com/anthonyjdella/tbd-issue-credential';
 export const TBD_BLOG =
   'https://developer.tbd.website/docs/tutorials/issue-verifiable-credential-manually/';
-export const SAMPLE_TICKET_NUMBER = 1234;
+export const SAMPLE_TICKET_NUMBER = '1234';
 export const NAVIGATION = [
   {
     name: 'Home',
