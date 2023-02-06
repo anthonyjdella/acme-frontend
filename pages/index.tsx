@@ -30,7 +30,7 @@ export default function Conf() {
   const ticketNumber = query.ticketNumber?.toString();
   const defaultUserData = {
     id: query.id?.toString(),
-    ticketNumber: ticketNumber ? parseInt(ticketNumber, 10) : undefined,
+    ticketNumber: ticketNumber ? ticketNumber : undefined,
     name: query.name?.toString(),
     username: query.username?.toString()
   };
