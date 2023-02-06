@@ -70,7 +70,7 @@ export default async function register(
   }
 
   let id = nanoid();
-  let ticketNumber: number;
+  let ticketNumber: string;
   let createdAt: number = Date.now();
   let statusCode = 200;
   let name: string | null | undefined = undefined;
@@ -83,7 +83,7 @@ export default async function register(
     const user = await getUserById(id);
     name = user.name;
     username = user.username;
-    ticketNumber = parseInt(existingTicketNumberString, 10);
+    ticketNumber = existingTicketNumberString;
     createdAt = user.createdAt!;
     statusCode = 200;
   } else {
