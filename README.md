@@ -1,6 +1,6 @@
 # Issue a Verifiable Credential with ACME Bank
 
-Visit [acme-frontend.vercel.app/](https://acme-frontend.vercel.app/).
+Visit [https://tbd-verify-credential.vercel.app/](https://tbd-verify-credential.vercel.app/).
 
 This was built on top of the [Virtual Event Starter Kit](https://github.com/vercel/virtual-event-starter-kit) by Vercel.
 
