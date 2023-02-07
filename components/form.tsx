@@ -80,8 +80,8 @@ export default function Form({ sharePage }: Props) {
             await router.replace(`/?${queryString}`, '/');
           } else {
             setUserData(params);
-            console.log('Issuer DID: ' + localStorage.issuerDid);
-            console.log('Schema ID: ' + localStorage.schemaId);
+            console.log(localStorage.issuerDid);
+            console.log(localStorage.schemaId);
             setPageState('ticket');
           }
         })

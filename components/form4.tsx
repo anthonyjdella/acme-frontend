@@ -81,8 +81,8 @@ export default function Form({ sharePage }: Props) {
         } else {
           localStorage.setItem('schemaId', params.ticketNumber);
           setUserData(params);
-          console.log('Issuer DID: ' + localStorage.issuerDid);
-          console.log('Schema ID: ' + localStorage.schemaId);
+          console.log(localStorage.issuerDid);
+          console.log(localStorage.schemaId);
           setPageState('ticket');
         }
       })
