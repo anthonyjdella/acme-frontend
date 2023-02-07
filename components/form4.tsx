@@ -79,8 +79,10 @@ export default function Form({ sharePage }: Props) {
             .join('&');
           await router.replace(`/?${queryString}`, '/');
         } else {
-          console.log('OUTSIDE SHAREPAGE');
+          localStorage.setItem('schemaId', params.ticketNumber);
           setUserData(params);
+          console.log('Issuer DID: ' + localStorage.issuerDid);
+          console.log('Schema ID: ' + localStorage.schemaId);
           setPageState('ticket');
         }
       })

@@ -80,6 +80,8 @@ export default function Form({ sharePage }: Props) {
             await router.replace(`/?${queryString}`, '/');
           } else {
             setUserData(params);
+            console.log('Issuer DID: ' + localStorage.issuerDid);
+            console.log('Schema ID: ' + localStorage.schemaId);
             setPageState('ticket');
           }
         })
@@ -143,7 +145,7 @@ export default function Form({ sharePage }: Props) {
     >
       <div className={styles['form-row']}>
         <div className={cn(styles['input-label'], styles.error)}>
-          <div className={cn(styles.input, styles['input-text'])}>Enter the correct Issuer DID</div>
+          <div className={cn(styles.input, styles['input-text'])}>Enter the Issuer DID associated with the schema ID</div>
           <button
             type="button"
             className={cn(styles.submit, styles.register, styles.error)}

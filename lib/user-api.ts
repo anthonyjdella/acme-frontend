@@ -15,35 +15,53 @@
  */
 import crypto from 'crypto';
 
-export async function createDid(keyType: string, didType: string) {
-  console.log(keyType, didType);
-  return await fetch('http://localhost:8080/v1/dids/key', {
+export async function createDid(keyType: string, didType?: string) {
+  return await fetch('http://localhost:8010/proxy/v1/dids/key', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      keyType: keyType,
-      didType: didType
+      keyType: keyType
+      // If Using Python test backend service, uncomment the next line
+      // didType: didType
     })
   });
 }
 
 export async function createSchema(issuerDid: string) {
-  console.log(issuerDid);
-  return await fetch('http://localhost:8080/v1/schemas', {
+  return await fetch('http://localhost:8010/proxy/v1/schemas', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      author: issuerDid
+      author: issuerDid,
+      name: 'ACME',
+      schema: {
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        description: 'Employee Status VC',
+        type: 'object',
+        properties: {
+          id: {
+            type: 'string'
+          },
+          givenName: {
+            type: 'string'
+          },
+          employedAt: {
+            type: 'string'
+          }
+        },
+        additionalProperties: false
+      },
+      sign: false
     })
   });
 }
 
 export async function validateCredential(issuerDid: string, subjectDid?: string, schemaID?: string) {
-  return await fetch('http://localhost:8080/v1/credentials', {
+  return await fetch('http://localhost:8010/proxy/v1/credentials', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -57,7 +75,7 @@ export async function validateCredential(issuerDid: string, subjectDid?: string,
       subject: 'did:key:z6MkqcFHFXqzsYyDYrEUA2pVCfQGJz2rYoCZy5WWszzSW3o6',
       '@context': 'https://www.w3.org/2018/credentials/v1',
       expiry: '2051-10-05T14:48:00.000Z',
-      schema: 'b28feb61-e0b8-454a-86ed-d487a46e8584'
+      schema: localStorage.schemaId
     })
   });
 }

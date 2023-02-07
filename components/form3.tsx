@@ -52,7 +52,7 @@ export default function Form({ sharePage }: Props) {
   const handleRegister = useCallback(() => {
     console.log(keyType);
     console.log(didType);
-    createDid(keyType, didType)
+    createDid(keyType)
       .then(async res => {
         if (!res.ok) {
           throw new FormError(res);

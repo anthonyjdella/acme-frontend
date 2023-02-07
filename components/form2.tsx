@@ -52,7 +52,7 @@ export default function Form({ sharePage }: Props) {
   const handleRegister = useCallback(() => {
     console.log(keyType);
     console.log(didType);
-    createDid(keyType, didType)
+    createDid(keyType)
       .then(async res => {
         if (!res.ok) {
           throw new FormError(res);
@@ -80,17 +80,19 @@ export default function Form({ sharePage }: Props) {
             .join('&');
           await router.replace(`/?${queryString}`, '/');
         } else {
-          console.log('DONTSHAREPAGE');
-          console.log(params);
+          localStorage.setItem('issuerDid', params.ticketNumber);
           setUserData(params);
-          console.log(params);
+          console.log('Issuer DID: ' + localStorage.issuerDid);
+          console.log('Schema ID: ' + localStorage.schemaId);
           setPageState('ticket');
         }
       })
       .catch(async err => {
+        console.log(err)
         let message = 'Error! Please try again.';
 
         if (err instanceof FormError) {
+          console.log(message)
           const { res } = err;
           const data = res.headers.get('Content-Type')?.includes('application/json')
             ? await res.json()
@@ -98,9 +100,11 @@ export default function Form({ sharePage }: Props) {
 
           if (data?.error?.code === 'bad_email') {
             message = 'Please enter a valid email';
+            console.log(message);
           }
         }
 
+        console.log(message);
         setErrorMsg(message);
         setFormState('error');
       });
